@@ -1,0 +1,107 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-center">
+
+    <div class="col text-center">
+
+      <label class="h3 fw-bold">Created Auctions</label>
+    </div>
+
+
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col text-center">
+
+
+
+      <div class="card text-center mt-2" *ngFor="let auction of createdAuctions">
+
+
+        <div class="card-header" *ngFor="let item of auction.auctionItems">
+          Object: {{item.name}}
+        </div>
+
+
+        <div class="card-body">
+          <h5 class="card-title">Category: {{auction.category.name}}</h5>
+          <p class="card-text">Description: {{auction.auctionDescription}}</p>
+          <div class="card-header" style="color: red;font-size: 1.2rem;" *ngIf="auction.winnerUsername">
+            Winner {{auction.winnerUsername}}
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col">
+              <button type="submit" class="btn btn-outline-dark" (click)="openItemDialog(auction.id)">Add Item</button>
+
+              <button (click)="getWinner(auction.id)"  class="btn btn-primary">End Auction</button>
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+        <div class="card-footer text-body-secondary">
+          <div class="row justify-content-center">
+
+            <div class="col">
+
+              <label>Created <span>{{auction.dateOfIssue | date:"dd/MM/yyyy"}}</span></label>
+
+            </div>
+
+            <div class="col">
+
+              <label>Ends <span>{{auction.endDate| date:"dd/MM/yyyy"}}</span></label>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+
+            <label class="text fw-bold">Bids</label>
+
+            <div class="d-flex flex-row justify-content-center">
+
+              <div class="card mt-2" *ngFor="let bid of auction.bids">
+
+                <label class="text">name {{bid.username}} value {{bid.bidAmount}} (€)</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<ng-template #item_modal let-modal>
+  <div class="modal-header text-center" >
+    <h4 class="logo">{{"Item"}} <span class="text-danger">{{"Form"}}</span></h4>
+    <!-- <h4 class="modal-title" id="modal-basic-title">Login</h4> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <form [formGroup]="itemForm">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" step="100" class="form-control" id="name" placeholder="write item name" formControlName="name">
+    </div>
+
+  </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="addItem(itemForm.value)">Add Item</button>
+  </div>
+</ng-template>

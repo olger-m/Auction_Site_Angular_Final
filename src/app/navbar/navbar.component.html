@@ -1,0 +1,94 @@
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide"> Auction Online</a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+      <a [routerLink]="['auction-list']" onclick="w3_close()" class="w3-bar-item w3-button">All Auctions</a>
+
+      <a [routerLink]="['userprofile']" *ngIf="isUserLoggedIn()" onclick="w3_close()" class="w3-bar-item w3-button">MY PROFILE</a>
+      <a [routerLink]="['createauction']" *ngIf="isUserLoggedIn()" onclick="w3_close()" class="w3-bar-item w3-button">CREATE AUCTION</a>
+
+      <a routerLink]="['admin']" onclick="w3_close()" *ngIf="isUserAdmin()" class="w3-bar-item w3-button">All Auctions</a>
+
+
+      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      <a (click)="gotoSignUp()" *ngIf="!isUserLoggedIn()"  class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> SIGN UP</a>
+      <a (click)="gotoLogin()" *ngIf="!isUserLoggedIn()" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> SIGN IN</a>
+      <a (click)="logoutUser()" *ngIf="isUserLoggedIn()" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> LOG OUT</a>
+
+
+
+    </div>
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</div>
+
+
+
+<!-- <nav
+  class="navbar navbar-expand-lg"
+  style="background-color: rgb(222, 219, 226)"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand title" [routerLink]="['home']"
+      > <span class="text-danger">ROYAL AUCTION</span></a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active title"
+            aria-current="page"
+            [routerLink]="['home']"
+            >Home</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link title" [routerLink]="['auction-list']"
+            >All Auctions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link title" [routerLink]="['userprofile']"
+          *ngIf="isUserLoggedIn()">My Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link title" [routerLink]="['createauction']"
+          *ngIf="isUserLoggedIn()">Create Auction
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link title" [routerLink]="['admin']"
+          *ngIf="isUserAdmin()">Admin
+          </a>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        <button class="btn btn-outline-danger" (click)="gotoLogin()" *ngIf="!isUserLoggedIn()">Login</button>
+        <button class="btn btn-outline-danger" (click)="gotoSignUp()" *ngIf="!isUserLoggedIn()">Register</button>
+        <button class="btn btn-outline-danger" (click)="logoutUser()" *ngIf="isUserLoggedIn()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav> -->

@@ -1,0 +1,117 @@
+
+
+
+<div class="container-fluid">
+
+  <div class="row justify-content-center">
+
+    <div class="col text-center">
+
+      <label class="h3 fw-bold">Participating Auctions</label>
+    </div>
+
+
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col text-center">
+
+
+
+      <div class="card text-center mt-2" *ngFor="let auction of participatingAuctions">
+
+
+        <div class="card-header" *ngFor="let item of auction.auctionItems">
+          Object: {{item.name}}
+        </div>
+
+
+        <div class="card-body">
+          <h5 class="card-title">Category: {{auction.category.name}}</h5>
+          <p class="card-text">Description: {{auction.auctionDescription}}</p>
+
+          <div class="row justify-content-between">
+            <div class="col">
+
+              <button (click)="leave(auction.id)" class="btn btn-primary">Leave Auction</button>
+            </div>
+
+            <div class="col">
+            </div>
+          </div>
+                  
+
+
+
+
+
+        </div>
+        <div class="card-footer text-body-secondary">
+          <div class="row justify-content-center">
+
+            <div class="col">
+
+              <label>Created <span>{{auction.dateOfIssue | date:"dd/MM/yyyy"}}</span></label>
+
+            </div>
+
+            <div class="col">
+
+              <label>Ends <span>{{auction.endDate| date:"dd/MM/yyyy"}}</span></label>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+
+            <label class="text fw-bold">Bids</label>
+
+            <div class="row row-cols-2 justify-content-center">
+
+              <div class="col-auto">
+
+
+                <div class="card mt-2" *ngFor="let bid of auction.bids">
+
+                  <label class="text">name {{bid.username}} value {{bid.bidAmount}} (€)</label>
+                  <button (click)="updatebid(bid.id,bid.username)" *ngIf="bid.username==user.username" class="btn btn-danger">Update Bid</button>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<ng-template #update_bid_modal let-modal>
+  <div class="modal-header text-center" >
+    <h4 class="logo">{{"Update"}} <span class="text-danger">{{"Bid"}}</span></h4>
+    <!-- <h4 class="modal-title" id="modal-basic-title">Login</h4> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <form [formGroup]="updateBidForm">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">New Value</label>
+      <input type="number" step="100" class="form-control" id="newBid" placeholder="enter New Bid" formControlName="newbid">
+    </div>
+
+  </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="newBid(updateBidForm.value)">Update</button>
+  </div>
+</ng-template>

@@ -1,0 +1,25 @@
+<div class="container">
+
+  <div class="row row-cols-3 justify-content-between" *ngIf="userInfoDto && user">
+
+    <div class="col-auto">
+
+      <app-participating-auctions [participatingAuctions]="userInfoDto.participatingAuctions" *ngIf="userInfoDto"></app-participating-auctions>
+
+    </div>
+
+
+    <div class="col-auto">
+
+      <app-created-auctions [createdAuctions]="userInfoDto.createdAuctions"></app-created-auctions>
+
+    </div>
+
+    <div class="col-auto">
+
+      <app-bids [placedBids]="userInfoDto.placedBids"></app-bids>
+
+    </div>
+
+  </div>
+</div>

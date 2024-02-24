@@ -1,0 +1,146 @@
+
+
+<div class="container-fluid">
+
+  <div class="row justify-content-center">
+
+    <div class="col text-center">
+
+      <label>All Available Auctions</label>
+    </div>
+  </div>
+
+  <div class="row row-cols-3 justify-content-center">
+
+    <div class="col-3" *ngFor="let auction of auctions">
+
+      <div class="card text-center mt-2">
+
+
+        <div class="card-header" *ngFor="let item of auction.auctionItems">
+          Object: {{item.name}}
+        </div>
+
+
+        <div class="card-body">
+          <h5 class="card-title">Category: {{auction.category.name}}</h5>
+          <p class="card-text">Description: {{auction.auctionDescription}}</p>
+
+          <div class="row justify-content-between">
+
+
+            <div class="col">
+
+              <button href="#" class="btn btn-primary" (click)="openBidDialog(auction.id)">Place bid</button>
+              <!-- <button href="#" class="btn btn-info" (click)="openItemDialog(auction.id)">Add Item</button> -->
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="card-footer text-body-secondary">
+          <div class="row justify-content-center">
+
+            <div class="col">
+
+              <label>Created <span>{{auction.dateOfIssue | date:"dd/MM/yyyy"}}</span></label>
+
+            </div>
+
+            <div class="col">
+
+              <label>Ends <span>{{auction.endDate| date:"dd/MM/yyyy"}}</span></label>
+
+            </div>
+          </div>
+
+          
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<ng-template #bid_modal let-modal>
+  <div class="modal-header text-center" >
+    <h4 class="logo">{{"auction"}} <span class="text-danger">{{"name"}}</span></h4>
+    <!-- <h4 class="modal-title" id="modal-basic-title">Login</h4> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <form [formGroup]="bidForm">
+
+    <div class="mb-3">
+      <label for="value" class="form-label">Value</label>
+      <input type="number" step="100" class="form-control" id="value" placeholder="place value" formControlName="value">
+    </div>
+
+  </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="placeBid(bidForm.value)">Add bid</button>
+  </div>
+</ng-template>
+
+<ng-template #item_modal let-modal>
+  <div class="modal-header text-center" >
+    <h4 class="logo">{{"Item"}} <span class="text-danger">{{"Form"}}</span></h4>
+    <!-- <h4 class="modal-title" id="modal-basic-title">Login</h4> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <form [formGroup]="itemForm">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" step="100" class="form-control" id="name" placeholder="write item name" formControlName="name">
+    </div>
+
+  </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <!-- <button type="submit" *ngIf="" class="btn btn-outline-dark" (click)="addItem(itemForm.value)">Add Item</button> -->
+  </div>
+</ng-template>
+
+
+
+<ng-template #update_bid_modal let-modal>
+  <div class="modal-header text-center" >
+    <h4 class="logo">{{"Update"}} <span class="text-danger">{{"Bid"}}</span></h4>
+    <!-- <h4 class="modal-title" id="modal-basic-title">Login</h4> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <form [formGroup]="updateBidForm">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">New Value</label>
+      <input type="number" step="100" class="form-control" id="newBid" placeholder="enter New Bid" formControlName="newbid">
+    </div>
+
+  </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="newBid(updateBidForm.value)">Update</button>
+  </div>
+</ng-template>

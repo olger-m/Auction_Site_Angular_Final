@@ -1,0 +1,67 @@
+<button class="btn btn-info">Back</button>
+<div class="container" style="width: 400px">
+  <form [formGroup]="auctionForm">
+    <h3>Create Auction</h3>
+
+    <div class="form-group">
+      <label for="minimumAmount">Minimum Amount (€)</label>
+      <input
+        type="number"
+        class="form-control"
+
+        formControlName="minimumAmount"
+      />
+
+      <label class="text text-danger" for="minimumAmount" *ngIf="auctionForm.hasError('required', 'minamount') && auctionForm.controls['minamount'].touched" >value can't be empty</label>
+    </div>
+
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="auctionDescription"
+      />
+
+      <label class="text text-danger" for="description" *ngIf="auctionForm.hasError('required', 'description') && auctionForm.controls['description'].touched" >value can't be empty</label>
+    </div>
+
+ <div class="form-group">
+      <label for="startdate">Start Date</label>
+      <input
+        type="date"
+        class="form-control"
+        formControlName="dateOfIssue"
+      />
+    </div> 
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input
+        type="date"
+        class="form-control"
+        formControlName="endDate"
+      />
+    </div> 
+
+    <div class="form-group">
+      <label for="endDate">Category</label>
+
+      <select formControlName="categories">
+
+        <option [value]="cat.name" *ngFor="let cat of categories">{{cat.name}}</option>
+
+      </select>
+    </div>
+    <button
+    type="submit"
+    class="btn btn-success"
+    (click)="onSubmit(auctionForm.value)"
+    [disabled]="auctionForm.invalid"
+  >
+    Register
+  </button>
+  </form>
+</div>
+
+
